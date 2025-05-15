@@ -1,0 +1,58 @@
+<% layout("/layouts/boilerplate") -%>
+<body>
+    <br>
+    
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h3>Create New Listing</h3>
+    <form method="POST" action="/listings" novalidate class="needs-validation">
+    
+        
+        <div class="mb-3">
+            <lable for="title" class="form-label"><b>Title</b></lable>
+            <input name="title" placeholder="Add a catchy Title"type="text"class="form-control" required/>
+            <div class="invalid-feedback">Enter a valid Title</div>
+            <div class="valid-feedback">Looks good</div>
+        </div>
+        <div class="mb-3">
+            <lable for="description" class="form-label" ><b>Description</b></lable>
+            <textarea name="description"class="form-control" required></textarea>
+            <div class="invalid-feedback">Please Enter a short Description</div>
+            <div class="valid-feedback">Looks good</div>
+        </div>
+
+        <div class="mb-3">
+            <lable for="image" class="form-label"><b>Image-link</b></lable>
+            <input name="image[url]" placeholder="Enter the image URL/Link" type="text" class="form-control"/>
+           
+        </div>
+        <div class="row">
+        <div class="mb-3 col-md-4" >
+            <lable for="price" class="form-label"><b>Price</b></lable>
+            <input name="price" placeholder="Enter the price"class="form-control" required/>
+            <div class="invalid-feedback">Enter a valid Price</div>
+            <div class="valid-feedback">Looks good</div>
+        </div>
+        <div class="mb-3 col-md-8">
+            <lable for="country" class="form-label"><b>Country</b></lable>
+            <input name="country" placeholder="Enter Country like India , U.S, Canada, etc"type="text"class="form-control" required/>
+            <div class="invalid-feedback">Enter a valid country name</div>
+            <div class="valid-feedback">Looks good</div>
+        </div>
+    </div>
+        <div class="mb-3">
+            <lable for="location" class="form-label"><b>Location</b></lable>
+            <input name="location" placeholder="Enter location like Gorakhpur, Delhi, etc"type="text"class="form-control"required/>
+            <div class="invalid-feedback">Enter a valid location</div>
+            <div class="valid-feedback">Looks good</div>
+        </div>
+
+        <button class="btn btn-dark add-btn">Add</button>
+         
+    </form>
+</div>
+
+</div>
+<br>
+    
+</body>
