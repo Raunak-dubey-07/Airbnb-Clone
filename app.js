@@ -51,6 +51,7 @@ app.get("/",(req,res)=>{
 app.use((req,res,next)=>{
     res.locals.success=req.flash("success");
     res.locals.error=req.flash("error");
+    res.locals.CurrUser=req.user;
     next();
 });
 // app.get("/demouser",async (req,res)=>{
@@ -76,6 +77,6 @@ app.use((err,req,res,next)=>{
     res.render("error.ejs",{message}); 
 });
 
-app.listen(8080,()=>{
+app.listen(3000,()=>{
     console.log("server is listening to port 8080");
 });

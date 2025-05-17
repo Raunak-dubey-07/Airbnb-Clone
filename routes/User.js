@@ -9,10 +9,16 @@ router.get("/signup",(req,res)=>{
 router.post("/signup",async(req,res)=>{
     try{
     let{username,Email,password}=await req.body;
-     const newUser=await new User({Email,username});
+     const newUser=new User({Email,username});
      const registerUser=await User.register(newUser,password);
-    req.flash("success","Welcome to AutoTravel!");
-    res.redirect("/listings");
+     req.login(registerUser,(err)=>{
+        if(err){
+            return next(err);
+        }
+         req.flash("success","Welcome to AutoTravel!");
+         res.redirect("/listings"); 
+     })
+    
     }
     catch(e){
         req.flash("error",e.message);
