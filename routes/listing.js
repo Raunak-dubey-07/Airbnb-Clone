@@ -19,7 +19,7 @@ router.get("/new",isLoggedIn,(req,res)=>{
     
     res.render("listings/new.ejs");
 });
-router.post("/",async(req,res,next)=>{
+router.post("/",isLoggedIn,async(req,res,next)=>{
     try{
        let result= listingSchema.validate(req.body);
     const NewListing=new Listing(req.body);
@@ -31,14 +31,14 @@ router.post("/",async(req,res,next)=>{
     }
 });
 //update route
-router.put("/:id",async(req,res)=>{
+router.put("/:id",isLoggedIn, async(req,res)=>{
     let {id}=req.params;
     let updateListing=await Listing.findByIdAndUpdate(id,{...req.body});
     req.flash("success",`${updateListing.title} Listing Updated!`);
     res.redirect("/listings");
 });
 //Delete Route
-router.delete("/:id",async(req,res)=>{
+router.delete("/:id",isLoggedIn, async(req,res)=>{
     let {id}=req.params;
     let deletelist=await Listing.findByIdAndDelete(id);
     req.flash("success",`${deletelist.title} Listing deleted!`);

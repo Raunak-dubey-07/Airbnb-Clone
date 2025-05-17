@@ -11,7 +11,6 @@ router.post("/signup",async(req,res)=>{
     let{username,Email,password}=await req.body;
      const newUser=await new User({Email,username});
      const registerUser=await User.register(newUser,password);
-    await console.log(registerUser);
     req.flash("success","Welcome to AutoTravel!");
     res.redirect("/listings");
     }
@@ -27,4 +26,13 @@ router.post("/login",passport.authenticate("local",{failureRedirect:'/login',fai
     req.flash("success","Welcome to AutoTravel You are Logged in!");
     res.redirect("/listings");
 });
+router.get("/logout",(req,res)=>{
+    req.logout((err)=>{
+        if(err){
+           return  next(err);
+        }
+        req.flash("success","You are Logged Out");
+        res.redirect("/listings");
+    })
+})
 module.exports=router;
