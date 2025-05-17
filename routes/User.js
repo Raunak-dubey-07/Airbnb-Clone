@@ -30,7 +30,7 @@ router.get("/login",(req,res)=>{
 });
 router.post("/login",passport.authenticate("local",{failureRedirect:'/login',failureFlash:true}),async(req,res)=>{
     req.flash("success","Welcome to AutoTravel You are Logged in!");
-    res.redirect("/listings");
+    res.redirect(CurrPath);
 });
 router.get("/logout",(req,res)=>{
     req.logout((err)=>{
