@@ -1,8 +1,27 @@
+const Listing=require("./models/listing");
+
 module.exports.isLoggedIn=(req,res,next)=>{
-    req.locals.CurrPath=req.originalUrl;
     if(!req.isAuthenticated()){
+        req.session.CurrPath=req.originalUrl;
         req.flash("error","You must be logged in to create listing!");
         return res.redirect("/login");
     }
     next();
+};
+module.exports.NewUrl=(req,res,next)=>{
+    res.locals.CurrPath="/listings";
+    if(req.session.CurrPath){
+    res.locals.CurrPath=req.session.CurrPath;
+    }
+    next();
+};
+module.exports.isOwner=async(req,res,next)=>{
+    let {id}=req.params;
+    let listing=await Listing.findById(id);
+        if(!listing.owner._id.equals(res.locals.CurrUser._id)){
+        req.flash("error","You don't have permission to edit");
+        return res.redirect(`/listings/${id}`);
+    }
+    next();
+
 }

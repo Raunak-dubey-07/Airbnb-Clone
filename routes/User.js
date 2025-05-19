@@ -3,6 +3,7 @@ const router=express.Router();
 const User=require("../models/User.js");
 const passport=require("passport");
 const flash = require('connect-flash');
+const {NewUrl}=require("../middleware.js");
 router.get("/signup",(req,res)=>{
     res.render("User/signup.ejs");
 });
@@ -28,9 +29,10 @@ router.post("/signup",async(req,res)=>{
 router.get("/login",(req,res)=>{
     res.render("User/login.ejs");
 });
-router.post("/login",passport.authenticate("local",{failureRedirect:'/login',failureFlash:true}),async(req,res)=>{
+router.post("/login",NewUrl,passport.authenticate("local",{failureRedirect:'/login',failureFlash:true}),async(req,res)=>{
     req.flash("success","Welcome to AutoTravel You are Logged in!");
-    res.redirect(CurrPath);
+    res.redirect(res.locals.CurrPath);
+    // res.redirect("/listings");
 });
 router.get("/logout",(req,res)=>{
     req.logout((err)=>{

@@ -10,18 +10,17 @@
         <div class="card-body ">
           <p class="card-text">
             <b>
-              <%=listing.title%>
-            </b><br>
-            <%=listing.description%><br>
-              &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %>/Night<br>
-                <%=listing.location%><br>
-                  <%=listing.country%><br>
-          </p>
+              <p><%=listing.title%></p>
+              </b>
+            <p>Owned by <i><%=listing.owner.username%></i></p>
+            <p><%=listing.description%></p>
+             <p> &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %>/Night</p>
+               <p> <%=listing.location%></p>
+                <p>  <%=listing.country%></p>
 
         </div>
         <br>
       </div>
-
       <div class="btns">
         <a href="/listings/<%=listing._id%>/edit" class="add-btn btn btn-dark col-1 offset-3">Edit</a>
         <br>
