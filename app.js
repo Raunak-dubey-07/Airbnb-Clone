@@ -5,6 +5,7 @@ const path=require("path");
 const methodOverride=require("method-override");
 const ejsMate=require("ejs-mate");
 const session=require("express-session");
+//const MongoStore=require("connect-mongo");
 const flash=require("connect-flash");
 const ExpressError=require("./util/ExpressError.js");
 const listings_route=require("./routes/listing.js");
@@ -13,22 +14,44 @@ const User_route=require("./routes/User.js");
 const passport=require("passport");
 const localStrategy=require("passport-local");
 const User=require("./models/User.js");
-main().then(()=>{
-    console.log("connected to db");
-}).catch(err => console.log(err));
+const MongoStore = require("connect-mongo");
+// main().then(()=>{
+//     console.log("connected to db");
+// }).catch(err => console.log(err));
+
+// async function main() {
+// //   await mongoose.connect('mongodb+srv://rounakdubey:<Raunak@12>@cluster0.0s2sqfj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+
+//   await mongoose.connect('mongodb://127.0.0.1:27017/wanderlust');
+// }
+main()
+  .then(() => {
+    console.log("✅ Connected to MongoDB Atlas");
+  })
+  .catch((err) => console.log("❌ MongoDB connection error:", err));
 
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/wanderlust');
-
-  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+  await mongoose.connect('mongodb+srv://rounakdubey:Raunak%4012@cluster0.0s2sqfj.mongodb.net/wanderlust?retryWrites=true&w=majority&appName=Cluster0');
 }
+
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded( {extended:true} ));
 app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
+const store=MongoStore.create({
+    mongoUrl:'mongodb+srv://rounakdubey:Raunak%4012@cluster0.0s2sqfj.mongodb.net/wanderlust?retryWrites=true&w=majority&appName=Cluster0',
+    crypto:{
+        secret:"mysecretcode",
+    },
+    touchAfter:24*3600,
+});
+store.on("error",()=>{
+    console.log("Error in mongo session code",err);
+})
 const sessionOptions={
+    store,
     secret:"mysecretcode",
     resave:false,
     saveUninitialized:true,
