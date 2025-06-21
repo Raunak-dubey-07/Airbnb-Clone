@@ -1,0 +1,76 @@
+<% layout("/layouts/boilerplate") -%>
+
+    <body>
+
+        <div class="row">
+            <div class="col-8 offset-2">
+                <br>
+                <h3>Book your Listing</h3>
+                <div class="card listing-card col-6 offset-3 ">
+        <img src="<%=listing.image.url%>" class="card-img-top show-img" alt="listing-image">
+        </div>
+                <form method="POST" action="/listings/<%= listing._id %>/book" novalidate class="needs-validation">
+                    <div class="mb-3">
+                        <input type="hidden" name="listingRef" value="<%= listing._id %>">
+                       <label for="ownerDisplay" class="form-label"><b>Owner</b></label>
+<input type="text" id="ownerDisplay" class="form-control" value="<%= listing.owner.username %>" disabled>
+<input type="hidden" name="buyer" value="<%= listing.owner._id %>">
+                        <div class="invalid-feedback">Enter a valid Title</div>
+                        <div class="valid-feedback">Looks good</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="title" class="form-label"><b>Title</b></label>
+                        <input name="title" value="<%=listing.title%> "disabled class="form-control" required/>
+                        <input type="hidden" name="title" value="<%= listing.title %>" />
+                        <div class="invalid-feedback">Enter a valid Title</div>
+                        <div class="valid-feedback">Looks good</div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-4">
+                            <label for="guest" class="form-label"><b>Guest</b></label>
+                            <input type="Number" name="guest" class="form-control" required />
+                            <div class="invalid-feedback">Enter a valid Price</div>
+                             <div class="valid-feedback">Looks good</div>
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label for="checkin" class="form-label">Check-in Date</label>
+    <input type="date" class="form-control" name="checkin" required>
+                            <div class="invalid-feedback">Enter a valid Price</div>
+                             <div class="valid-feedback">Looks good</div>
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label for="checkout" class="form-label">Check-out Date</label>
+    <input type="date" class="form-control" name="checkout" required>
+                            <div class="invalid-feedback">Enter a valid Price</div>
+                             <div class="valid-feedback">Looks good</div>
+                        </div>
+                        </div>
+                         <div class="row">
+                        <div class="mb-3 col-md-4">
+                            <label for="price" class="form-label"><b>Price</b></label>
+                            <input name="price" value="<%=listing.price%>"disabled class="form-control" required />
+                            <div class="invalid-feedback">Enter a valid Price</div>
+                             <div class="valid-feedback">Looks good</div>
+                        </div>
+                        <div class="mb-3 col-md-8">
+                            <label for="country" class="form-label"><b>Country</b></label>
+                            <input name="country" value="<%=listing.country%>"disabled type="text"
+                                class="form-control" required />
+                                <div class="invalid-feedback">Enter a valid country name</div>
+            <div class="valid-feedback">Looks good</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <lable for="location" class="form-label"><b>Location</b></lable>
+                        <input name="location" value="<%=listing.location%>" disabled type="text" class="form-control" required/>
+                        <div class="invalid-feedback">Enter a valid Location</div>
+                        <div class="valid-feedback">Looks good</div>
+                    </div>
+
+                    <button class="btn btn-dark add-btn">Book</button>
+                </form>
+                <br>
+            </div>
+            </div>
+
+    </body>

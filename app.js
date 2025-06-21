@@ -5,7 +5,6 @@ const path=require("path");
 const methodOverride=require("method-override");
 const ejsMate=require("ejs-mate");
 const session=require("express-session");
-//const MongoStore=require("connect-mongo");
 const flash=require("connect-flash");
 const ExpressError=require("./util/ExpressError.js");
 const listings_route=require("./routes/listing.js");
@@ -15,15 +14,6 @@ const passport=require("passport");
 const localStrategy=require("passport-local");
 const User=require("./models/User.js");
 const MongoStore = require("connect-mongo");
-// main().then(()=>{
-//     console.log("connected to db");
-// }).catch(err => console.log(err));
-
-// async function main() {
-// //   await mongoose.connect('mongodb+srv://rounakdubey:<Raunak@12>@cluster0.0s2sqfj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
-
-//   await mongoose.connect('mongodb://127.0.0.1:27017/wanderlust');
-// }
 main()
   .then(() => {
     console.log("✅ Connected to MongoDB Atlas");
@@ -68,24 +58,12 @@ app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser()); 
-// app.get("/",(req,res)=>{
-//     res.send("Hi, I am root");
-// });
 app.use((req,res,next)=>{
     res.locals.success=req.flash("success");
     res.locals.error=req.flash("error");
     res.locals.CurrUser=req.user;
     next();
 });
-// app.get("/demouser",async (req,res)=>{
-//     let fakeUser=new User({
-//         email:"abc123@getMaxListeners.com",
-//         username:"new-student",
-//     });
-//     let newUser=await User.register(fakeUser,'12345678');
-//     res.send(newUser);
-
-// })
 app.use("/listings",listings_route);
 app.use("/listings/:id/reviews",review_route);
 app.use("/",User_route);
@@ -96,7 +74,6 @@ app.all("*",(req,res,next)=>{
 })
 app.use((err,req,res,next)=>{
     let {statusCode=500,message="Something went wrong"}=err;
-    //res.status(statusCode).send(message);
     res.render("error.ejs",{message}); 
 });
 

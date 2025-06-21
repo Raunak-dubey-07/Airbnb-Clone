@@ -32,18 +32,44 @@
         <br>
       </div>
 
-      <div class="btns">
-        <a href="/listings/<%=listing._id%>/edit" class="add-btn btn btn-dark col-1 offset-3">Edit</a>
+      <!-- <div class="btns">
+        <% if (CurrUser && listing.owner && CurrUser._id.toString() === listing.owner._id.toString()) { %>
+              <a href="/listings/<%=listing._id%>/edit" class="add-btn btn btn-dark col-1 offset-3">Edit</a>
         <br>
         <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
           <button class="btn btn-dark offset-4">Delete</button>
         </form>
+        <%}%>
+        <form method="GET" action="/listings/<%=listing._id%>/booking" class="col-1 offset-3 text-end">
+          <button class="add-btn btn btn-dark w-200">Book</button>
+        </form>
+      
+      </div> -->
+      <div class="btns col-8 offset-3">
+        <% if (CurrUser && listing.owner && String(CurrUser._id)===String(listing.owner._id)) { %>
+          <a href="/listings/<%= listing._id %>/edit" class="add-btn btn btn-dark col-1">Edit</a>
+
+          <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+            <button class="btn btn-dark offset-6">Delete</button>
+          </form>
+          <form method="GET" action="/listings/<%= listing._id %>/booking" class="col-8 offset-6">
+              <button class="add-btn btn btn-dark">Book</button>
+            </form>
+          <% } 
+           else {%>
+            <form method="GET" action="/listings/<%= listing._id %>/booking" class="col-8 offset-8">
+              <button class="add-btn btn btn-dark">Book</button>
+            </form>
+          <%}%>
+            <!-- <form method="GET" action="/listings/<%= listing._id %>/booking" class="col-8 offset-8">
+              <button class="add-btn btn btn-dark">Book</button>
+            </form> -->
       </div>
-      
-      
-        <div class="col-8 offset-3">
-          <br>
-          <% if(CurrUser){%>
+
+
+      <div class="col-8 offset-3">
+        <br>
+        <% if(CurrUser){%>
           <h4>Leave a Review</h4>
           <br>
           <form action="/listings/<%=listing.id%>/reviews" method="POST" novalidate class="needs-validation">
@@ -53,21 +79,22 @@
             </div> -->
             <div class="mt-3 mb-3">
               <label for="rating" class="form-label ">Rating</label>
-            <fieldset class="starability-slot">
-              
-  <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked aria-label="No rating." />
-  <input type="radio" id="first-rate1" name="rating" value="1" />
-  <label for="first-rate1" title="Terrible">1 star</label>
-  <input type="radio" id="first-rate2" name="rating" value="2" />
-  <label for="first-rate2" title="Not good">2 stars</label>
-  <input type="radio" id="first-rate3" name="rating" value="3" />
-  <label for="first-rate3" title="Average">3 stars</label>
-  <input type="radio" id="first-rate4" name="rating" value="4" />
-  <label for="first-rate4" title="Very good">4 stars</label>
-  <input type="radio" id="first-rate5" name="rating" value="5" />
-  <label for="first-rate5" title="Amazing">5 stars</label>
-</fieldset>
-</div>
+              <fieldset class="starability-slot">
+
+                <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked
+                  aria-label="No rating." />
+                <input type="radio" id="first-rate1" name="rating" value="1" />
+                <label for="first-rate1" title="Terrible">1 star</label>
+                <input type="radio" id="first-rate2" name="rating" value="2" />
+                <label for="first-rate2" title="Not good">2 stars</label>
+                <input type="radio" id="first-rate3" name="rating" value="3" />
+                <label for="first-rate3" title="Average">3 stars</label>
+                <input type="radio" id="first-rate4" name="rating" value="4" />
+                <label for="first-rate4" title="Very good">4 stars</label>
+                <input type="radio" id="first-rate5" name="rating" value="5" />
+                <label for="first-rate5" title="Amazing">5 stars</label>
+              </fieldset>
+            </div>
             <div class="mt-3 mb-3">
               <label for="comment" class="form-label">Comments</label>
               <textarea name="content" id="comment" cols="30" rows="5" class="form-control" required></textarea>
@@ -75,10 +102,10 @@
             </div>
             <button class="btn btn-outline-dark">submit</button>
           </form>
-          
-            <br>
-            <hr>
-            <% } %>
+
+          <br>
+          <hr>
+          <% } %>
 
 
             <p><b>All Reviews</b></h4>
@@ -86,7 +113,9 @@
               <% for(review of listing.reviews) {%>
                 <div class="card card-review col-5 mt-3 ms-3">
                   <div class="card-body">
-                    <h5 class="card-title"><i>@</i><%=review.author.username%></h5>
+                    <h5 class="card-title"><i>@</i>
+                      <%=review.author.username%>
+                    </h5>
                     <p class="starability-result card-text" data-rating="<%=review.rating%>"></p>
                     <p class="card-text">
                       <%=review.content%>
@@ -94,7 +123,7 @@
                     <p class="card-text">
                       <%=review.rating%>
                     </p>
-                    
+
                   </div>
                   <form method="POST" action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE">
                     <button class="btn btn-sm btn-dark mb-3">Delete</button>
@@ -103,5 +132,5 @@
                 <% } %>
             </div>
             <br>
-        </div>
+      </div>
   </body>

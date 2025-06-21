@@ -3,14 +3,22 @@ body{
     display: flex !important;
     flex-direction: column !important;
     min-height: 100vh !important;
+   
 }
-
+.listing-items{
+    padding-left: 60px !important;
+    padding-right: 30px !important;
+}
 .container-fluid{
     flex: 1 !important;
 }
 .add-btn{
-    background-color: #fe424d !important;
+    background-color: #ff404c !important;
     border: none !important;
+
+}
+.add-btn:hover{
+    background-color: #f80919fd !important;
 }
 .navbar{
       height:5rem;
@@ -79,6 +87,8 @@ body{
 }
 .btns{
     display: flex;
+    color: #ffffff !important;
+
 }
 .card-review{
     border: solid black 1px !important;
@@ -87,4 +97,73 @@ body{
     display:flex;
     flex-direction: column;
     justify-content: center;
+}
+.navbar-nav{
+    gap:2rem;
+}
+.book{
+    display: flex;
+    gap: 2rem;
+
+}
+.list-group {
+  border: 1px solid #7a7676 !important; /* Airbnb pink */
+  border-radius: 25px;
+}
+.btnn{
+    border: 1px solid #FF5A5F;
+   padding: 6px;
+   padding-right: 13px;
+   padding-left: 13px;
+   border-radius: 8px;
+   color: #fe424d;
+   text-decoration: none;
+}
+.btnn:hover{
+   border: 1px solid #fe424d;
+   padding: 6px;
+   padding-right: 13px;
+
+   padding-left: 13px;
+   border-radius: 8px;
+   background-color: #fe424d;
+   color: #ffffff;
+   text-decoration: none;
+}
+#filters{
+    display: flex;
+    flex-wrap:wrap ;
+}
+.filter p{
+    font-size: 0.8rem;
+}
+.filter{
+    text-align: center;
+    align-content: center;
+    margin-top: 1rem;
+    opacity: 0.8;
+    width: 90px;
+    height: 70px;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+.filter:hover{
+    opacity: 1;
+    cursor: pointer;
+    background-color: #e9e7e7;
+}
+.btn-search{
+    background-color: #fe424d !important;
+    color: #ffffff !important;
+    border-radius: 25px !important;
+    padding: 0 1rem 0 1rem !important;
+}
+.btn-search i{
+    display: inline;
+    margin-right: 0.5rem;
+}
+.search-input{
+    border-radius: 25px !important;
+    padding: 0.5rem 3rem 0.5rem 3rem !important;
+    font-size: 1rem !important;
 }

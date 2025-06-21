@@ -2,8 +2,11 @@ const express=require("express");
 const router=express.Router();
 const {isLoggedIn, isOwner}=require("../middleware.js");
 const listingController=require("../Controller/listing");
+router.post("/:id/book", isLoggedIn, listingController.Booklistingss);
+router.get("/my/bookings", isLoggedIn, listingController.myBookings);
 //edit route
 router.get("/:id/edit",isLoggedIn, isOwner,listingController.Editlistings);
+router.get("/:id/booking",isLoggedIn, isOwner,listingController.Booklistings);
 router.route("/")
 //ALL Listings
 .get(listingController.index)
