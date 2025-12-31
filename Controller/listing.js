@@ -24,11 +24,7 @@ module.exports.createlistings=async(req,res,next)=>{
 module.exports.Booklistingss = async (req, res, next) => {
     try {
         const newBooking = new Booking(req.body);
-
-        // Override buyer from current logged-in user (ignore hidden input from form)
         newBooking.buyer = req.user._id;
-
-        // Optional: Validate dates
         if (new Date(newBooking.checkin) >= new Date(newBooking.checkout)) {
             req.flash("error", "Check-out must be after check-in.");
             return res.redirect("back");

@@ -31,56 +31,37 @@
         </div>
         <br>
       </div>
-
-      <!-- <div class="btns">
-        <% if (CurrUser && listing.owner && CurrUser._id.toString() === listing.owner._id.toString()) { %>
-              <a href="/listings/<%=listing._id%>/edit" class="add-btn btn btn-dark col-1 offset-3">Edit</a>
-        <br>
-        <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
-          <button class="btn btn-dark offset-4">Delete</button>
-        </form>
-        <%}%>
-        <form method="GET" action="/listings/<%=listing._id%>/booking" class="col-1 offset-3 text-end">
-          <button class="add-btn btn btn-dark w-200">Book</button>
-        </form>
-      
-      </div> -->
       <div class="btns col-8 offset-3">
+       
         <% if (CurrUser && listing.owner && String(CurrUser._id)===String(listing.owner._id)) { %>
+
           <a href="/listings/<%= listing._id %>/edit" class="add-btn btn btn-dark col-1">Edit</a>
 
           <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
             <button class="btn btn-dark offset-6">Delete</button>
           </form>
-          <form method="GET" action="/listings/<%= listing._id %>/booking" class="col-8 offset-6">
+          <form method="GET" action="/listings/<%= listing._id %>/booking" class="offset-6">
+            <button class="add-btn btn btn-dark">Book</button>
+          </form>
+
+          <% } else { %>
+
+            <form method="GET" action="/listings/<%= listing._id %>/booking">
               <button class="add-btn btn btn-dark">Book</button>
             </form>
-          <% } 
-           else {%>
-            <form method="GET" action="/listings/<%= listing._id %>/booking" class="col-8 offset-8">
-              <button class="add-btn btn btn-dark">Book</button>
-            </form>
-          <%}%>
-            <!-- <form method="GET" action="/listings/<%= listing._id %>/booking" class="col-8 offset-8">
-              <button class="add-btn btn btn-dark">Book</button>
-            </form> -->
+
+            <% } %>
+
       </div>
-
-
       <div class="col-8 offset-3">
         <br>
         <% if(CurrUser){%>
           <h4>Leave a Review</h4>
           <br>
           <form action="/listings/<%=listing.id%>/reviews" method="POST" novalidate class="needs-validation">
-            <!-- <div class="mt-3 mb-3">
-              <label for="rating" class="form-label ">Rating</label>
-              <input type="range" min="1" max="5" step="1" id="rating" name="rating" class="form-range" min="0" max="5">
-            </div> -->
             <div class="mt-3 mb-3">
               <label for="rating" class="form-label ">Rating</label>
               <fieldset class="starability-slot">
-
                 <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked
                   aria-label="No rating." />
                 <input type="radio" id="first-rate1" name="rating" value="1" />
@@ -102,12 +83,9 @@
             </div>
             <button class="btn btn-outline-dark">submit</button>
           </form>
-
           <br>
           <hr>
           <% } %>
-
-
             <p><b>All Reviews</b></h4>
             <div class="row">
               <% for(review of listing.reviews) {%>
@@ -133,4 +111,5 @@
             </div>
             <br>
       </div>
+    </div>
   </body>
