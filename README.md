@@ -60,6 +60,7 @@ cd Airbnb-Clone
 2. **Install dependencies**
    
 npm install
+
 3. **Start the server**
 
 node server.js
